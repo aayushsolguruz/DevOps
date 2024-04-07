@@ -1,0 +1,31 @@
+# Jenkins Pipeline YAML configuration for executing a Nest.js build
+
+pipeline:
+  agent:
+    any
+
+  environment:
+    NODE_ENV: 'production' # Optionally set the NODE_ENV to 'production'
+
+  stages:
+    - stage: Checkout
+      steps:
+        - script:
+            git 'https://github.com/aayushsolanki40/DevOps'
+
+    - stage: Install Dependencies
+      steps:
+        - script:
+            npm install
+
+    - stage: Build
+      steps:
+        - script:
+            npm run build
+
+    # Add more stages as needed for additional build steps like testing, linting, etc.
+
+  post:
+    always:
+      - script:
+          sh 'echo "Nest.js build completed"'
