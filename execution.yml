@@ -8,10 +8,10 @@ pipeline:
     NODE_ENV: 'production' # Optionally set the NODE_ENV to 'production'
 
   stages:
-    - stage: Checkout
-      steps:
-        - script:
-            git 'https://github.com/aayushsolanki40/DevOps'
+    # - stage: Checkout
+    #   steps:
+    #     - script:
+    #         git 'https://github.com/aayushsolanki40/DevOps'
 
     - stage: Install Dependencies
       steps:
