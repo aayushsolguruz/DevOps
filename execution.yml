@@ -1,32 +1,38 @@
-# Jenkins Pipeline YAML configuration for executing a Nest.js build
-
 pipeline:
   agent:
     any
 
   environment:
-    NODE_ENV: 'production' # Optionally set the NODE_ENV to 'production'
+    NODE_VERSION: "14" # Specify the Node.js version
+    NPM_VERSION: "latest" # Specify the npm version
 
   stages:
-    # - stage: Checkout
-
-    #   steps:
-    #     - script:
-    #         git 'https://github.com/aayushsolanki40/DevOps'
-
-    - stage: Install Dependencies
+    - stage: Checkout
       steps:
-        - script:
-            npm i
+        - name: Checkout code
+          git:
+            url: https://github.com/aayushsolanki40/DevOps.git
+            branch: main # or specify the branch you want to build
 
     - stage: Build
       steps:
-        - script:
-            npm run build
+        - name: Install dependencies
+          sh: |
+            npm install
 
-    # Add more stages as needed for additional build steps like testing, linting, etc.
+    - stage: Test
+      steps:
+        - name: Run unit tests
+          sh: |
+            npm run test
+
+    - stage: Deploy
+      steps:
+        - name: Build and deploy
+          sh: |
+            npm run build
 
   post:
     always:
-      - script:
-          sh 'echo "Nest.js build completed"'
+      - cleanWs() # Clean workspace after build
+
