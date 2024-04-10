@@ -9,6 +9,7 @@ pipeline:
 
   stages:
     # - stage: Checkout
+
     #   steps:
     #     - script:
     #         git 'https://github.com/aayushsolanki40/DevOps'
@@ -16,7 +17,7 @@ pipeline:
     - stage: Install Dependencies
       steps:
         - script:
-            npm install
+            npm i
 
     - stage: Build
       steps:
